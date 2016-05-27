@@ -1,4 +1,4 @@
-package dto;
+package com.prodigious.festivity.dto;
 
 /**
  * @author Daniel Bernal Bazzani

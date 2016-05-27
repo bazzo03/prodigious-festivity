@@ -1,4 +1,4 @@
-package client;
+package com.prodigious.festivity.client;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,9 +20,20 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import dto.FestivityDto;
+import com.prodigious.festivity.dto.FestivityDto;
 
-public class Parser {
+/**
+ * @author Daniel Bernal Bazzani
+ * @version 0.0.1
+ * @since 0.0.1
+ *
+ *        Class used to obtain data from the XML file and sent to the api to be
+ *        saved
+ */
+public class FestivityLoader {
+
+	/** Source file to be parsed and save via web service */
+	private static final String XML_SOURCE_FILE = "./src/main/resources/festivities.xml";
 
 	/** Url to post the festivities */
 	private static final String POST_URL = "http://localhost:8080/festivity-api/festivity/add";
@@ -68,7 +79,6 @@ public class Parser {
 
 		readFile();
 		postFestivities();
-		getAllFestivities();
 	}
 
 	/**
@@ -77,7 +87,7 @@ public class Parser {
 	private static void readFile() {
 
 		try {
-			File inputFile = new File("./src/main/resources/festivities2.xml");
+			File inputFile = new File(XML_SOURCE_FILE);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
 					.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
