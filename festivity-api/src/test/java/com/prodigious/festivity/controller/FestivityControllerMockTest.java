@@ -1,5 +1,6 @@
 package com.prodigious.festivity.controller;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import org.easymock.Mock;
 import org.easymock.TestSubject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.prodigious.festivity.converter.DtoToFestivity;
@@ -99,6 +101,7 @@ public class FestivityControllerMockTest {
 				.getAllFestivities();
 
 		assertNotNull(response);
+		assertEquals(response.getStatusCode(), HttpStatus.OK);
 
 		verifyAll();
 	}
@@ -121,6 +124,7 @@ public class FestivityControllerMockTest {
 				.getAllFestivities();
 
 		assertNotNull(response);
+		assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
 
 		verifyAll();
 	}
@@ -159,6 +163,7 @@ public class FestivityControllerMockTest {
 				.createFestivity(dto);
 
 		assertNotNull(response);
+		assertEquals(response.getStatusCode(), HttpStatus.OK);
 
 		verifyAll();
 	}
@@ -193,6 +198,7 @@ public class FestivityControllerMockTest {
 				.createFestivity(dto);
 
 		assertNotNull(response);
+		assertEquals(response.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
 
 		verifyAll();
 	}

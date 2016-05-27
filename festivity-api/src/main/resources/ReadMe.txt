@@ -21,5 +21,12 @@ If you want to try the web service using your default browser or another tool, s
 you can search in the package: com.prodigious.festivity.constant # RestEndpoint.java for the Endpoints
 
 
+
+---//--
+To RUN the client, first of all you must adjust the DBMS, then deploy de API project in a tomcat server
+and finally, you must execute the java file: com.prodigious.festivity.client.FestivityLoader.java
+as a java application
+---//--
+
 The GitHub Repository address is: https://github.com/bazzo03/prodigious-festivity
  
