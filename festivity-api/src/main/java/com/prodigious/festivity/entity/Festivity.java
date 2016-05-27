@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author Daniel Bernal Bazzani
@@ -19,22 +20,27 @@ public class Festivity {
 	/** Unique identification for this Festivity */
 	@Id
 	@Column(name = "festivity_id")
+	@NotNull
 	private String id;
 
 	/** Name for this Festivity */
 	@Column(name = "festivity_name")
+	@NotNull
 	private String name;
 
 	/** Place of the festivity */
 	@Column(name = "festivity_place")
+	@NotNull
 	private String place;
 
 	/** Start date of this Festivity */
 	@Column(name = "festivity_start_date")
+	@NotNull
 	private String startDate;
 
 	/** End date of this Festivity */
 	@Column(name = "festivity_end_date")
+	@NotNull
 	private String endDate;
 
 	/**
