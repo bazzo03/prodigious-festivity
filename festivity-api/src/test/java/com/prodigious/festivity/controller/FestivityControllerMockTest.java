@@ -17,8 +17,10 @@ import com.prodigious.festivity.converter.DtoToFestivity;
 import com.prodigious.festivity.converter.FestivityToDto;
 import com.prodigious.festivity.dto.FestivityDto;
 import com.prodigious.festivity.entity.Festivity;
+import com.prodigious.festivity.exception.PridigiousValidatorException;
 import com.prodigious.festivity.exception.ProdigiousException;
 import com.prodigious.festivity.service.IFestivityService;
+import com.prodigious.festivity.util.FestivityValidationUtil;
 
 /**
  * @author Daniel Bernal Bazzani
@@ -128,10 +130,11 @@ public class FestivityControllerMockTest {
 	 * 
 	 * @throws ProdigiousException
 	 *             thrown when an error occurs
+	 * @throws PridigiousValidatorException
 	 */
 	@Test
 	public void createFestivity_CompleteInfo_ShouldSuccess()
-			throws ProdigiousException {
+			throws ProdigiousException, PridigiousValidatorException {
 
 		resetAll();
 
@@ -139,7 +142,14 @@ public class FestivityControllerMockTest {
 		Festivity fest = new Festivity();
 		Festivity saved = new Festivity();
 
+		dto.setEndDate("2015-10-27T14:01:09.009Z");
+		dto.setStartDate("2014-10-27T14:01:09.009Z");
+		dto.setName("name");
+		dto.setPlace("place");
+
 		EasyMock.expect(toEntity.convert(dto)).andReturn(fest);
+		FestivityValidationUtil.validateFestivity(dto);
+		EasyMock.expectLastCall();
 		EasyMock.expect(festivityService.saveFestivity(fest)).andReturn(saved);
 		EasyMock.expect(toDto.convert(saved)).andReturn(dto);
 
@@ -167,6 +177,11 @@ public class FestivityControllerMockTest {
 
 		FestivityDto dto = new FestivityDto();
 		Festivity fest = new Festivity();
+
+		dto.setEndDate("2015-10-27T14:01:09.009Z");
+		dto.setStartDate("2014-10-27T14:01:09.009Z");
+		dto.setName("name");
+		dto.setPlace("place");
 
 		EasyMock.expect(toEntity.convert(dto)).andReturn(fest);
 		EasyMock.expect(festivityService.saveFestivity(fest)).andThrow(

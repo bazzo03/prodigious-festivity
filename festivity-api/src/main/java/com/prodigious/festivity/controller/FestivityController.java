@@ -17,8 +17,10 @@ import com.prodigious.festivity.converter.DtoToFestivity;
 import com.prodigious.festivity.converter.FestivityToDto;
 import com.prodigious.festivity.dto.FestivityDto;
 import com.prodigious.festivity.entity.Festivity;
+import com.prodigious.festivity.exception.PridigiousValidatorException;
 import com.prodigious.festivity.exception.ProdigiousException;
 import com.prodigious.festivity.service.IFestivityService;
+import com.prodigious.festivity.util.FestivityValidationUtil;
 
 /**
  * @author Daniel Bernal Bazzani
@@ -82,7 +84,12 @@ public class FestivityController {
 		LOGGER.info("Request to create/update a Festivity was received");
 		Festivity saved = null;
 		try {
+			FestivityValidationUtil.validateFestivity(dto);
 			saved = festivityService.saveFestivity(toEntity.convert(dto));
+		} catch (PridigiousValidatorException e) {
+			LOGGER.error("Some information is empty or null", e);
+			return new ResponseEntity<>(new FestivityDto(),
+					HttpStatus.BAD_REQUEST);
 		} catch (ProdigiousException e) {
 			LOGGER.error(
 					"There was an error trying to save/update the Festivity", e);
@@ -93,4 +100,3 @@ public class FestivityController {
 		return new ResponseEntity<>(savedDto, HttpStatus.OK);
 	}
 }
-

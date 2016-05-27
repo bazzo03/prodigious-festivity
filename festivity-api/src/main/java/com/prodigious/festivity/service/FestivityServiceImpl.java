@@ -17,7 +17,7 @@ import com.prodigious.festivity.exception.ProdigiousException;
  * @version 0.0.1
  * @since 0.0.1
  * 
- * Implementation of the operations defined in {@link IFestivityService}
+ *        Implementation of the operations defined in {@link IFestivityService}
  */
 @Service
 public class FestivityServiceImpl implements IFestivityService {
@@ -25,32 +25,45 @@ public class FestivityServiceImpl implements IFestivityService {
 	/** Logger for the class */
 	private static final Logger LOGGER = Logger
 			.getLogger(FestivityServiceImpl.class);
-	
+
 	/** DAO to operate the {@link Festivity} */
 	@Autowired
 	private IFestivityDao festivityDAO;
-	
-	/* (non-Javadoc)
-	 * @see com.prodigious.festivity.service.FestivityService#getAllFestivities()
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.prodigious.festivity.service.FestivityService#getAllFestivities()
 	 */
 	@Transactional
 	public List<Festivity> getAllFestivities() {
-		
+
 		LOGGER.info("Searching for the festivities");
 		return festivityDAO.getAllFestivities();
 	}
 
-	/* (non-Javadoc)
-	 * @see com.prodigious.festivity.service.FestivityService#saveFestivity(com.prodigious.festivity.form.Festivity)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.prodigious.festivity.service.FestivityService#saveFestivity(com.
+	 * prodigious.festivity.form.Festivity)
 	 */
 	@Transactional
 	@Override
-	public Festivity saveFestivity(Festivity festivity) throws ProdigiousException {
-		
+	public Festivity saveFestivity(Festivity festivity)
+			throws ProdigiousException {
+
 		LOGGER.info("Saving the festivity");
-		Instant startDate = Instant.parse(festivity.getStartDate());
-		Instant endDate = Instant.parse(festivity.getEndDate());
-		if (endDate.isBefore(startDate)) {
+		Instant startDate = null;
+		Instant endDate = null;
+		try {
+			startDate = Instant.parse(festivity.getStartDate());
+			endDate = Instant.parse(festivity.getEndDate());
+		} catch (Exception e) {
+			throw new ProdigiousException("Date format is wrong");
+		}
+		if (startDate != null && endDate != null && endDate.isBefore(startDate)) {
 			LOGGER.error("End Date is greater than End Date");
 			throw new ProdigiousException("End Date is greater than End Date");
 		}
@@ -71,13 +84,17 @@ public class FestivityServiceImpl implements IFestivityService {
 		return festivityDAO.saveFestivity(festivity);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.prodigious.festivity.service.FestivityService#updateFestivity(com.prodigious.festivity.form.Festivity)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.prodigious.festivity.service.FestivityService#updateFestivity(com
+	 * .prodigious.festivity.form.Festivity)
 	 */
 	@Transactional
 	@Override
 	public Festivity updateFestivity(Festivity festivity) {
-		
+
 		LOGGER.info("Updating Festivity");
 		return festivityDAO.updateFestivity(festivity);
 	}

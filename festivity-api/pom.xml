@@ -117,23 +117,19 @@
 			<artifactId>commons-pool</artifactId>
 			<version>20030825.183949</version>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>hibernate</groupId> -->
-		<!-- <artifactId>hibernate-entitymanager</artifactId> -->
-		<!-- <version>3.4.0.GA</version> -->
-		<!-- <type>pom</type> -->
-		<!-- </dependency> -->
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.0</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>3.6.2.Final</version>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.hibernate</groupId> -->
-		<!-- <artifactId>hibernate-annotations</artifactId> -->
-		<!-- <version>3.5.6-Final</version> -->
-		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
