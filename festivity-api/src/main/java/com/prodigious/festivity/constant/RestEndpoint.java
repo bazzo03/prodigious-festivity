@@ -5,7 +5,7 @@ package com.prodigious.festivity.constant;
  * @version 0.0.1
  * @since 0.0.1
  *
- *        Class to obtain all the endpoints for the controllers
+ *        Class to obtain all the end points for the controllers
  */
 public class RestEndpoint {
 
